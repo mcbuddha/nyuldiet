@@ -9,13 +9,15 @@ window.next = ->
     window.location.reload()
   window.card = window.nyultap[_.random window.nyultap.length-1]
   ($ '#lives').html (new Array(1+window.LS)).join NYUL
-  ($ '[value=HINT]').remove()
+  ($ '.hi').remove()
   ($ 'input').removeClass 'ok wrong'
   ($ '[type=number]').val 0
   ($ '#name').text window.card.name
   for k in 'energy protein fat ch'.split ' '
     if window.card[k].length > 1
-      ($ "##{k[0]}").append "<input type=\"button\" value=\"HINT\" onclick=\"hint('#{k}')\"></td>"
+      ($ "##{k[0]}").append "<td class=\"hi\"><input type=\"button\" value=\"HINT\" onclick=\"hint('#{k}')\"></td>"
+    else
+      ($ "##{k[0]}").append "<td class=\"hi\"></td>"
 
 window.ok = -> window.next() if _.foldl ($ '[type=number]'), ((a,f) ->
   f = $ f
@@ -26,10 +28,7 @@ window.ok = -> window.next() if _.foldl ($ '[type=number]'), ((a,f) ->
     (f.removeClass 'wrong').addClass 'ok'
     a), on
 
-window.show = ->
-  window.LS -= 1
-  ($ "[name=#{k}]").val window.card[k][0] for k in 'energy protein fat ch'.split ' '
-
+window.show = -> ($ "[name=#{k}]").val window.card[k][0] for k in 'energy protein fat ch'.split ' '
 window.hint = (k) -> alert window.card[k][1]
 
 $ ->

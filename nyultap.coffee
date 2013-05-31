@@ -1,6 +1,6 @@
 window.tap =
 """búzacsíra 349, 25, 8, 42
-bakonyi barna 249, 8.5, 0,8, 50.6
+bakonyi barna 249, 8.5, 0.8, 50.6
 kifli 133, 4.5, 1.1, 25.6
 kalács 285, 9.4, 2.3, 55 
 búzakorpa 322, 15[=tészta], 5.1, 51
