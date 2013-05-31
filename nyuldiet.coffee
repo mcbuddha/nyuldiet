@@ -4,6 +4,9 @@ window.card = null
 window.LS = 5
 
 window.next = ->
+  if window.LS < 1
+    alert 'Game over, megbuktál :('
+    window.location.reload()
   window.card = window.nyultap[_.random window.nyultap.length-1]
   ($ '#lives').html (new Array(1+window.LS)).join NYUL
   ($ '[value=HINT]').remove()
