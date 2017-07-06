@@ -1,44 +1,51 @@
-NYUL = '&#128048;'
+NYUL = 'X'
 window.nyultap = null
 window.card = null
 window.LS = 5
 
 window.next = ->
+  window.card = window.kk[_.random window.kk.length-1]
+  window.ls()
+  ($ 'input').removeClass 'ok wrong'
+  ($ '#q').text window.card.q
+  ($ '#num').text window.card.num
+  ($ '#a + .opt').text window.card.a
+  ($ '#b + .opt').text window.card.b
+  ($ '#c + .opt').text window.card.c
+  ($ '#d + .opt').text window.card.d
+
+window.ls = ->
+  ($ '#lives').html (new Array(1+window.LS)).join NYUL
   if window.LS < 1
     alert 'Game over, megbuktál :('
     window.location.reload()
-  window.card = window.nyultap[_.random window.nyultap.length-1]
-  ($ '#lives').html (new Array(1+window.LS)).join NYUL
-  ($ '.hi').remove()
-  ($ 'input').removeClass 'ok wrong'
-  ($ '[type=number]').val 0
-  ($ '#name').text window.card.name
-  for k in 'energy protein fat ch'.split ' '
-    if window.card[k].length > 1
-      ($ "##{k[0]}").append "<td class=\"hi\"><input type=\"button\" value=\"HINT\" onclick=\"hint('#{k}')\"></td>"
-    else
-      ($ "##{k[0]}").append "<td class=\"hi\"></td>"
 
-window.ok = -> window.next() if _.foldl ($ '[type=number]'), ((a,f) ->
-  f = $ f
-  if window.card[(f.attr 'name')][0] isnt f.val()
-    (f.removeClass 'ok').addClass 'wrong'
-    no
+window.ok = (a, b) ->
+  ans = a.target.innerText.toLowerCase()
+  if window.card.ans is ans
+    window.next()
   else
-    (f.removeClass 'wrong').addClass 'ok'
-    a), on
-
-window.show = -> ($ "[name=#{k}]").val window.card[k][0] for k in 'energy protein fat ch'.split ' '
-window.hint = (k) -> alert window.card[k][1]
+    window.LS--
+    window.ls()
 
 $ ->
-  ($ 'input').on 'focus', (e) -> ($ e.target).val ''
-  window.nyultap = _.collect (window.tap.split '\n'), (i) ->
-    line = _.collect (i.split ','), (j) -> j.trim()
-    field = (f) -> (f.replace ']', '').split '['
-    name: line[0][..(x=(line[0].split '[')[0].lastIndexOf ' ')].trim()
-    energy: field line[0][x..].trim()
-    protein: field line[1]
-    fat: field line[2]
-    ch: field line[3]
+  ($ '#a, #b, #c, #d').click (a, b) -> window.ok a, b
+  window.kk = _.collect window.konnyu, (i) ->
+    [num, ans, q, a, b, c, d] = i
+    num: num
+    ans: ans
+    q: q
+    a: a
+    b: b
+    c: c
+    d: d
+  window.nn = _.collect window.nehez, (i) ->
+    [num, ans, q, a, b, c, d] = i
+    num: num
+    ans: ans
+    q: q
+    a: a
+    b: b
+    c: c
+    d: d
   window.next()

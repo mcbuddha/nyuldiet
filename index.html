@@ -3,33 +3,44 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>nyuldiet</title>
+    <title>mlszjb</title>
     <script src="node_modules/zepto/zepto.min.js"></script>
     <script src="node_modules/lodash/dist/lodash.min.js"></script>
-    <script src="nyultap.js"></script>
     <script src="nyuldiet.js"></script>
+    <script src="mlszjb_k.js"></script>
+    <script src="mlszjb_n.js"></script>
 
     <style>
       body { font-size: 1.5em; width: 100%; }
       table { width: 100%; }
-      input { font-size: 1em; width: 100px;}
-      td { width: 100px; }
+      button { font-size: 1em; width: 100%;}
+      tr { height: 2em; }
+      #a, #b, #c, #d { width: 100px; }
       .wrong { color: red; }
       .ok { color: green; }
+      #q { display: inline; }
     </style>
   </head>
 
   <body>
     <div id="card">
-      <h1 id="name"></h1>
+      <span id="num"></span><h3 id="q"></h3>
       <table>
-	<tr id="e"><td>Energia</td><td><input type="number" name="energy"></input></td></tr>
-	<tr id="p"><td>Fehérje</td><td><input type="number" name="protein"></input></td></tr>
-	<tr id="f"><td>Zsír</td><td><input type="number" name="fat"></input></td></tr>
-	<tr id="c"><td>Szénhidrát</td><td><input type="number" name="ch"></input></td></tr>
 	<tr>
-	  <td><input type="button" value="OK" onclick="ok()"></td>
-	  <td><input type="button" value="show" onclick="window.LS -= 1; show()"></td>
+	  <td id="a"><button type="button">A</button></td>
+	  <td class="opt"></td>
+	</tr>
+	<tr>
+	  <td id="b"><button type="button">B</button></td>
+	  <td class="opt"></td>
+	</tr>
+	<tr>
+	  <td id="c"><button type="button">C</button></td>
+	  <td class="opt"></td>
+	</tr>
+	<tr>
+	  <td id="d"><button type="button">D</button></td>
+	  <td class="opt"></td>
 	</tr>
       </table>
       <h1 id="lives"></h1>
