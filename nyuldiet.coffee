@@ -19,7 +19,7 @@ window.next = ->
     else
       ($ "##{k[0]}").append "<td class=\"hi\"></td>"
 
-window.ok = -> window.next() if _.foldl ($ '[type=number]'), ((a,f) ->
+window.ok = -> window.next() if _.reduce ($ '[type=number]'), ((a,f) ->
   f = $ f
   if window.card[(f.attr 'name')][0] isnt f.val()
     (f.removeClass 'ok').addClass 'wrong'
@@ -32,9 +32,9 @@ window.show = -> ($ "[name=#{k}]").val window.card[k][0] for k in 'energy protei
 window.hint = (k) -> alert window.card[k][1]
 
 $ ->
-  ($ 'input').on 'focus', (e) -> ($ e.target).val ''
-  window.nyultap = _.collect (window.tap.split '\n'), (i) ->
-    line = _.collect (i.split ','), (j) -> j.trim()
+  ($ 'input[type=number]').on 'focus', (e) -> ($ e.target).val ''
+  window.nyultap = _.map (window.tap.split '\n'), (i) ->
+    line = _.map (i.split ','), (j) -> j.trim()
     field = (f) -> (f.replace ']', '').split '['
     name: line[0][..(x=(line[0].split '[')[0].lastIndexOf ' ')].trim()
     energy: field line[0][x..].trim()
